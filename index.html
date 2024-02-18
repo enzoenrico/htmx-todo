@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"
+        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <form hx-post="/todo" hx-target="#todos" hx-swap="innerHTML" _="on submit target.reset()">
+        <label for="task">Bun Todo</label>
+        <input id="task" name="task" type="text" aria-label="Create Bun Todo" placeholder="New Bun todo" >
+        <button type="submit">Create Bun</button>
+    </form>
+
+    <section id="todos" hx-get="/todos" hx-trigger="load"></section>
+
+</body>
+
+</html>
