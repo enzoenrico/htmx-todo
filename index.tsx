@@ -37,14 +37,10 @@ async function apiHandler(req: Request): Response {
     }
     if (url.pathname === "/todos" && req.method === "DELETE") {
         const data = await req.formData()
-        const dataid = data.get('task')
-        console.log(dataid)
-        todoList = todoList.filter((val) => {
-            return val.task !== dataid
-        })
+        console.log(data)
+        todoList.pop()
 
-
-        return new Response(renderToString(<TodoList data={todoList} />), {status: 200})
+        return new Response(renderToString(<TodoList data={todoList} />), { status: 200 })
     }
 
 
@@ -53,17 +49,20 @@ async function apiHandler(req: Request): Response {
 
 
 function TodoList(props: { data: Todo[] }) {
-    return (<ul>
+    return (
+        <ul className="flex items-center flex-col p-2">
+            {
+                props.data.length
+                    ? props.data.map((todo) =>
+                        <li className="flex justify-evenly items-center flex-col">
+                            <p className="text-lg">{todo.task}</p>
 
-        {
-            props.data.length
-                ? props.data.map((todo) => <li>{todo.task}
-                    <input type="checkbox" name="done" id="done" hx-delete="/todos" />
-                    <p id="id">{todo.id}</p>
-                </li>)
-                : "no tasks found"
-        }
-    </ul>)
+                            <p id="id" className="text-sm text-slate-700">{todo.id}</p>
+                        </li>)
+                    : "no tasks found"
+            }
+        </ul>
+    )
 }
 
 

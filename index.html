@@ -8,18 +8,23 @@
     <script src="https://unpkg.com/htmx.org@1.9.10"
         integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
-<body>
-
-    <form hx-post="/todo" hx-target="#todos" hx-swap="innerHTML" _="on submit target.reset()">
-        <label for="task">Bun Todo</label>
-        <input id="task" name="task" type="text" aria-label="Create Bun Todo" placeholder="New Bun todo" >
-        <button type="submit">Create Bun</button>
+<body class="flex items-center justify-evenly w-screen h-screen">
+    <form hx-post="/todo" hx-target="#todos" hx-swap="innerHTML" class="flex flex-col border border-purple-900 rounded-xl items-center justify-evenly p-5 ">
+        <label for="task" class="font-semibold">Bun Todo</label>
+        <input class="border border-purple-600 text-center rounded-xl" id="task" name="task" type="text" aria-label="Create Bun Todo" placeholder="New Bun todo">
+        <button type="submit" class="border bg-gradient-to-tr from-purple-500 to-pink-500 p-2 m-5 rounded-md text-white">Create Bun</button>
     </form>
 
-    <section id="todos" hx-get="/todos" hx-trigger="load"></section>
+    <section id="todos" hx-get="/todos" hx-trigger="load" class="border-x border-pink-800 p-5">
+    </section>
+    <button class="border border-slate-800 p-2 rounded-lg hover:bg-slate-500 hover:text-white transition-colors" hx-delete="/todos" hx-target="#todos">Reset tasks</button>
+
 
 </body>
 

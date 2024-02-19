@@ -11,12 +11,14 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "dev": "bun --watch --hot run index.ts"
+    "dev": "bun --watch --hot run index.tsx"
   },
   "dependencies": {
     "@types/typescript": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-dom/server": "react-dom/server"
+    "react-dom/server": "react-dom/server",
+    "tailwind": "^4.0.0",
+    "tailwindcss": "^3.4.1"
   }
 }
