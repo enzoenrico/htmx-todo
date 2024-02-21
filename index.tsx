@@ -8,6 +8,7 @@ const server = Bun.serve({
 type Todo = {
     id: number;
     task: string;
+    bolenado: boolean;
 }
 
 let todoList: Todo[] = []
@@ -27,23 +28,18 @@ async function apiHandler(req: Request): Response {
         if (!task.length) {
             return new Response(renderToString(<TodoList data={todoList} />))
         } else {
-
             todoList.push({
                 id: task.length + 1,
-                task: task
+                task: task,
+                bolenado: false
             })
         }
         return new Response(renderToString(<TodoList data={todoList} />))
     }
     if (url.pathname === "/todos" && req.method === "DELETE") {
-        const data = await req.formData()
-        console.log(data)
-        todoList.pop()
-
+        todoList = []
         return new Response(renderToString(<TodoList data={todoList} />), { status: 200 })
     }
-
-
     return new Response("not found", { status: 404 })
 }
 
@@ -58,6 +54,7 @@ function TodoList(props: { data: Todo[] }) {
                             <p className="text-lg">{todo.task}</p>
 
                             <p id="id" className="text-sm text-slate-700">{todo.id}</p>
+                            <input type="checkbox" name="bolenado" id="bolenado" defaultChecked={todo.bolenado} />
                         </li>)
                     : "no tasks found"
             }
